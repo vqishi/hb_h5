@@ -1,0 +1,40 @@
+{
+  "code": 0,
+  "message": "执行成功",
+  "data": {
+    "total": 2,
+    "rows":[
+      {
+        "id":"1",
+        "mainPic": "picture/3_1_2.png",
+        "examplePic": "picture/3_1_1.jpg",
+        "json": [
+          {
+            "type": "image",
+            "style": {
+              "pos": [
+                136,
+                98
+              ],
+              "size": [
+                506,
+                814
+              ]
+            }
+          },
+          {
+            "type": "text",
+            "style": {
+              "pos": [
+                31,
+                400
+              ],
+              "font":"40px '微软雅黑'",
+              "lineHeight": 78
+            }
+          }
+        ]
+      }
+    ] 
+}
+}

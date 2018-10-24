@@ -1,0 +1,537 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="css/loading.css" />
+    <link rel="stylesheet" type="text/css" href="css/wfullpage.css" />
+    <link rel="stylesheet" type="text/css" href="css/cropper.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script src="js/modernizr.custom.js"></script>
+    <script type="text/javascript" src='js/screen.mate.js'></script>
+    <script type="text/javascript" src='js/prefixfree.min.js'></script>
+</head>
+<body>
+  <!-- 加载页面 -->
+  <div id="loader-wrapper" >
+    <div id="loader"></div><!-- <div class="logos"></div> -->
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+  <!-- 加载页面 over-->
+
+
+  <!-- 截图前的div -->
+  <div id="index-3_1_2">
+	  <!--<div style="width:100%;height:100%;position:relative;">
+		  <img src="" id="photo">
+		  <img src="" id="background-style">
+		  <span id="photo-name"></span>
+	  </div>-->
+	  <div id="hbcanvas" style="width:100%;height:100%;"></div>
+  </div>
+
+
+ <!-- 滑屏容器 -->
+ <div class="container" id="container">
+    <!-- pt -->
+    <div id="pt-main" class="pt-perspective" >
+      <div class="pt-page pt-page-1">
+         <img src="picture/1.jpg" class="bac">
+         <img src="picture/1_1.png" class="index-1_1 ani" animate-effect="Scaling" animate-duration="0.5s" animate-delay="0.5s">
+         <a id="next" class="ani" animate-effect="fadeInUp" animate-duration="0.5s" animate-delay="0.3s">
+            <img src="picture/1_2.png" class="index-1_2 ani" animate-effect="Scales" animate-duration="0.3s" animate-delay="0.8s" style="transform-origin: center;" >
+         </a>
+      </div>
+
+      <div class="pt-page pt-page-2">
+          <img src="picture/2.jpg" class="bac">
+          <img src="picture/2_1.png" class="index-2_1">
+          <img src="picture/2_2.png" class="index-2_2">
+          <img src="picture/2_3.png" class="index-2_3">
+          <img src="picture/2_4.png" class="index-2_4 ani" animate-effect="Scales" animate-duration="0.5s" animate-delay="0.3s" style="transform-origin: center;">
+          <input type="text" name="name" id="name" class="name" placeholder="填入姓名">
+          <button id="Splane"></button>
+          <input id="Uphoto" type="file" name="files" accept="image/*" >
+          <button id="yes"></button>
+          <img src="picture/ok.png" class="index-2_2_1">
+          <img src="picture/ok.png" class="index-2_2_2">
+      </div>
+
+      <div class="pt-page pt-page-3">
+          <img src="" id="index-3_1" class="bac">
+          <a href="index.html"><img src="" class="index-3_2 ani" animate-effect="Scales" animate-duration="0.5s" animate-delay="0.3s" style="transform-origin: center;"></a>
+          <img src="images/3_5_1.png" class="index-3_3"> 
+          <!-- 提示长按保存图片遮罩 tipIframe -->
+          <div class="tipIframe">
+            <label>长按保存图片，可分享至朋友圈</label>
+          </div>
+
+      </div>
+    </div>  
+  </div>
+
+  <!-- 第二页弹窗 selectPlane -->
+
+  <div class="selectPlane">
+    <div class="content">
+      <img id="style" src="">
+      <button class="close close2"></button>
+      <button class="pre"></button>
+      <button class="next2 "></button>
+      <button class="ok3"></button>
+      <button class="cancel close2"></button>
+    </div>
+  </div>
+
+  <!--第二页弹窗 upDownload  -->
+  <div class="upDownload">
+    <div class="screenShot">
+      <img id="img1" src="">
+      
+    </div>
+    <a class="ok2"><img class="index-2_1_2" src="picture/2_1_2.png"></a>
+    <a class="cancel2"><img class="index-2_1_3" src="picture/2_1_3.jpg"></a>
+    <a class="rotates"><img class="index-2_1_4" src="picture/2_1_4.png"></a>
+  </div>
+
+  <!-- 上传图片遮罩 -->
+  <div class="imgLoading">
+    <label>正在上传图片，请稍等</label>
+    <div id="progress" class="progress" style="margin-top: 20px;">
+        <div class="progress-bar progress-bar-success" style="width: 90%;"></div>
+    </div>
+  </div>
+
+  <!-- 正在制作遮罩 -->
+  <div class="makingLoading">
+    <label>正在制作海报，请稍等...</label>
+  </div>
+
+  <!-- 分享遮罩 hideIframe -->
+  <div class="hideIframe">
+    <img src="picture/3_5.png">
+  </div>
+
+
+ <!-- 滑屏容器 over-->
+
+<!-- arrow box --> 
+<!--  <div class="arrw-wrap">
+          <img src="picture/arrow.png" class="arrow-up">
+ </div> -->
+<!-- arrow box over-->
+
+<!-- 访问量显示器 -->
+<!--  <div id='visit_count'></div> -->
+ 
+ <!-- 背景音乐  -->
+ <audio id="music" src="1.mp3" loop="loop" autoplay="autoplay"></audio>
+
+</body>
+<script>
+	var apiPath="http://193.112.53.93:8087/";
+</script>
+<script type="text/javascript" src='js/jquery.js'></script>
+<!--<script src="js/html2canvas.js"></script>-->
+<script type="text/javascript" src='js/sprite.min.js'></script>
+<script type="text/javascript" src='js/jquery.cookie.js'></script>
+<script type="text/javascript" src='js/jquery.touchswipe.min.js'></script>
+<script type="text/javascript" src='js/imagesloaded.pkgd.min.js'></script>
+<!-- <script src="js/jquery.touchswipe.min.js"></script> -->
+<script src="js/animate.js"></script>
+<script src="js/wfullpage.js"></script>
+<script src="js/cropper.js"></script>
+<script src="js/jquery.ui.widget.js"></script>
+<script src="js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="js/weixin.share.js"></script>
+<script type="text/javascript">
+	
+  var datas = {};
+  
+  var templates=[];
+  $.ajax({
+	  url:apiPath+"templateInfo/list",
+	  dataType:"json",
+	  success:function(data){
+		  templates=data.data.rows;
+		  $("#style").attr('src',templates[0].mainPic);
+	  }
+  });
+  window.onload = function (){
+    document.getElementsByTagName('body')[0].addEventListener('touchmove', function (e) {
+        e.preventDefault();
+    });
+
+    //由于安卓下键盘弹出会导致页面resize的，写个监听resize事件
+    var height = $('body').height();
+    $(window).resize(function() {
+        $('.container').height(height);
+    });
+
+    window.alert = function(name){
+      var iframe = document.createElement("IFRAME");
+      iframe.style.display="none";
+      iframe.setAttribute("src", 'data:text/plain,');
+      document.documentElement.appendChild(iframe);
+      window.frames[0].window.alert(name);
+      iframe.parentNode.removeChild(iframe);
+    }
+	$.ajax({
+		url:apiPath+"baseInfo/detail",
+		dataType:"json",
+		success:function(data){
+			var result=data.data;
+			$("title").text(result.title);
+			$.weixinShare({
+				debug: false,
+				title: result.title,
+				desc: result.name,
+				link: window.location.href,
+				imgUrl:result.mainPic
+			});
+		}
+	});
+  var $pre = $(".pre");
+  var $next2 = $(".next2");
+  var $close2 = $(".close2");
+  var $ok3 = $(".ok3");
+  var $style = $("#style");
+  var $selectPlane = $(".selectPlane");
+  var $Splane = $("#Splane");
+  var $index2_2_1 = $(".index-2_2_1");
+/*  var $imgUrls = ['images/3_1_1.jpg','images/3_2_1.jpg','images/3_3_1.jpg'];
+  var $imgUrl2s = ['images/3_1_2.png','images/3_2_2.png','images/3_3_2.png'];  
+  var $imgUrl3s = ['images/3_4_1.png','images/3_4_1.png','images/3_4_3.png'];
+  var $imgUrl4s = ['images/3_5_1.png','images/3_5_2.png','images/3_5_3.png'];*/
+
+  var index = 0;
+  //上一页
+  $pre.on('click', function(){
+      index = (index == 0)?index:--index;
+      $style.attr('src',templates[index].mainPic);
+  });
+  //下一页
+  $next2.on('click', function(){
+      index = (index == (templates.length-1))?index:(++index);
+      $style.attr('src',templates[index].mainPic);
+  });
+  //关闭，取消
+  $close2.on('click', function(){
+      $selectPlane.fadeOut();
+  });
+  var panelImg=null;
+  //确定
+  $ok3.on('click', function(){
+     datas.panelImgUrl = templates[index].templatePic;
+	 panelImg=new Image();
+	 panelImg.src=datas.panelImgUrl;
+     $selectPlane.fadeOut();
+     if (datas.panelImgUrl!=''&&datas.panelImgUrl!=undefined&&datas.panelImgUrl!=null) {
+        $index2_2_1.show();
+     }
+	  $('#Uphoto').show();
+	  var image=new Image();
+	  image.src=datas.panelImgUrl;
+  });
+  $('.index-2_3').on("click",function(){
+  	if(!datas.panelImgUrl){
+  		alert("请先选择模版!")
+	}
+  });
+  //出现模板选择弹窗
+  $Splane.on('click', function(){
+     $selectPlane.fadeIn();
+  });
+	var url = 'http://waajyun.s1.natapp.cc/file/upload';
+	var img = $("#img1");
+	var $upDownload = $(".upDownload");
+	var $index2_2_2 = $(".index-2_2_2");
+	$('#Uphoto').hide();
+	$('#Uphoto').change(function(){
+  	//$('.imgLoading').show();
+	  	var url = window.URL.createObjectURL(this.files.item(0));
+		$('.imgLoading').hide();
+		$('#progress').hide();
+		img.attr('src', url);
+		img.cropper("destroy","","");
+		img.cropper({
+			aspectRatio: 0.615,
+			resizable:false,
+			minContainerWidth:panelImg.width||640,
+			minContainerHeight:panelImg.height||1040,
+			crop: function(e) {
+				// Output the result data for cropping image.
+/*				console.log(e.x);
+				console.log(e.y);
+				console.log(e.width);
+				console.log(e.height);
+				console.log(e.rotate);
+				console.log(e.scaleX);
+				console.log(e.scaleY);*/
+			}
+		});
+
+		$(".rotates").on('click', function(){
+
+			img.cropper("rotate",90);
+
+		});
+
+		$(".ok2").on('click',function(){
+
+			var can = img.cropper("getCroppedCanvas",{fillColor: "#fff"},"");
+
+			var base64 = can.toDataURL("image/jpeg");
+
+			datas.base64ImgUrl = base64;
+
+			$upDownload.fadeOut();
+
+			if (datas.base64ImgUrl!=''&&datas.base64ImgUrl!=undefined&&datas.base64ImgUrl!=null) {
+
+				$index2_2_2.show();
+			}
+
+		});
+
+		$(".cancel2").on('click', function(){
+
+			$upDownload.fadeOut();
+
+		});
+		$upDownload.show();
+	});
+  var $yes = $("#yes");
+  var $name = $("#name");
+  var $index3_1 = $("#index-3_1");
+  var $index3_1_2 = $("#index-3_1_2");
+  var $makingLoading = $(".makingLoading");
+  var $tipIframe = $(".tipIframe");
+  var $index3_2 = $(".index-3_2");
+  var $index3_3 = $(".index-3_3");
+   var $next = $("#next");
+  $next.on('click', function(){
+      wfullpage.toNextPage();
+  });
+
+  $yes.on('click', function(){
+    var name = $name.val();
+
+    if (name==''||name==undefined||name==null){
+
+          alert('请输入姓名');
+          return false;
+
+    }
+
+    if (datas.panelImgUrl==''||datas.panelImgUrl==undefined||datas.panelImgUrl==null){
+
+          alert('请选择模板');
+          return false;
+
+    }
+
+    if (datas.base64ImgUrl==''||datas.base64ImgUrl==undefined||datas.base64ImgUrl==null){
+
+          alert('请上传照片');
+          return false;
+    }
+
+	  $index3_1_2.show();
+	  $("#hbcanvas").html("");
+	  var hbwidth=panelImg.width||640;
+	  var hbheight=panelImg.height||1040;
+	  
+	  var scene = new spritejs.Scene('#hbcanvas', {
+		  viewport: [hbwidth,hbheight],
+		  resolution: [hbwidth,hbheight],
+	  });
+	  var layer = scene.layer();
+	  datas.name = $name.val();
+	  var hbbackground = new spritejs.Sprite(datas.panelImgUrl);
+	  hbbackground.attr({
+		  anchor: [0,0],
+		  pos: [0, 0],
+		  zIndex:2,
+	  });
+	  layer.append(hbbackground);
+	//$backgroundStyle.attr("src", datas.panelImgUrl);
+	var layers=(typeof templates[index].json==="string"?JSON.parse(templates[index].json):templates[index].json);
+	//$index3_3.attr('src',templates[index].mainPic);
+	for(var i=0;i<layers.length;i++){
+		layers[i].style=layers[i].style||{};
+		if(layers[i].type==='text'){
+/*			$photoName.css(layers[i].style);
+			$photoName.html(datas.name);*/
+			var label = new spritejs.Label(datas.name);
+			label.attr({
+				"pos":layers[i].style.pos,
+				"fillColor":layers[i].style.fillColor||"white",
+				"font":layers[i].style.font||"30px '微软雅黑'",
+				"lineHeight":layers[i].style.lineHeight,
+				"zIndex":layers[i].style.zIndex||10
+			});
+			layer.append(label);
+		}else if(layers[i].type==='image'){
+			var image=new spritejs.Sprite(datas.base64ImgUrl);
+			image.attr({
+				"pos":layers[i].style.pos,
+				"size":layers[i].style.size
+			});
+			layer.append(image);
+/*			$photo.attr("src", datas.base64ImgUrl);
+			$photo.css(layers[i].style);*/
+		}
+	}
+	$index3_2.css({'left':'0px','bottom':'0px','width':'134px','height':'28px'});
+	$index3_2.attr('src','picture/3_4_1.png');
+/*	$index3_2.css({'left':'0px','bottom':'0px','width':'134px','height':'28px'});
+	$index3_3.attr('src', $imgUrl4s[index]);*/
+   /* switch(index){
+        case 0: 
+          $photoName.css({'left':'68px','top':'904px','width':'162px','height':'78px','line-height':'78px','font-size':'40px'});
+          $index3_2.attr('src', $imgUrl3s[index]);
+          $index3_2.css({'left':'0px','bottom':'0px','width':'134px','height':'28px'});
+          $index3_3.attr('src', $imgUrl4s[index]);
+          break;
+        case 1: 
+          $photoName.css({'left':'0px','top':'392px','width':'174px','height':'55px','line-height':'55px','font-size':'40px'});
+          $index3_2.attr('src', $imgUrl3s[index]);
+          $index3_2.css({'left':'0px','bottom':'0px','width':'134px','height':'28px'});
+          $index3_3.attr('src', $imgUrl4s[index]);
+          break;
+        case 2: 
+          $photoName.css({'left':'180px','top':'638px','width':'175px','height':'69px','line-height':'69px','font-size':'30px'});
+          $index3_2.attr('src', $imgUrl3s[index]);
+          $index3_2.css({'right':'0px','top':'625px','width':'34px','height':'100px'});
+          $index3_3.attr('src', $imgUrl4s[index]);
+          break;
+        default:
+          break;
+    }*/
+    var url = '';
+    $makingLoading.show();
+    scene.snapshot().then(function(canvas){
+    	setTimeout(function(){
+			var base64 =$("#hbcanvas canvas")[0].toDataURL('image/jpeg');
+			//$index3_3.attr('src',base64);
+			datas.screenShotImgUrl = base64;
+			$index3_1.show();
+			$index3_1.attr("src",base64);
+			$.ajax({
+				url:apiPath+"sharedLog/upload",
+				type:"post",
+				data:{templateId:templates[index].id,userName:datas.name,base64:base64},
+				success:function(data){
+					$makingLoading.hide();
+					wfullpage.toNextPage();
+					setTimeout(function(){
+						$tipIframe.fadeOut();
+					},1500);
+					$index3_1_2.hide();
+				},
+				error:function(){
+					$tipIframe.fadeOut();
+				}
+			});
+			/*$.ajax({
+				url:apiPath+"templateInfo/shareOnSuccess/"+templates[index].id||"",
+				type:'post',
+				success:function(data){
+					
+				}
+			})*/
+		},200)
+	})
+/*    setTimeout(function(){
+		html2canvas(document.getElementById('index-3_1_2'), {
+			allowTaint: true,
+			taintTest: false,
+			background:"#fff",
+			onrendered: function (canvas) {
+				$makingLoading.hide();
+				var base64 = canvas.toDataURL("images/e601288fd3a54ee79e31baa47dd67379.gif");
+				datas.screenShotImgUrl = base64;
+
+
+				$index3_1.show();
+				$index3_1.attr("src",base64);
+
+				wfullpage.toNextPage();
+
+
+				$index3_1_2.hide();
+
+				setTimeout(function(){
+
+					$tipIframe.fadeOut();
+
+				}, 2500);
+			}
+		});
+	},20)*/
+	
+  });
+
+    // var hideIframe = $(".hideIframe");
+    
+    // hideIframe.on('click',function(){
+
+    //     hideIframe.hide();
+
+    // });
+
+  }
+  
+  var music = document.getElementById('music')
+  music.play();
+  document.addEventListener("WeixinJSBridgeReady", function () {
+        music.play();
+  }, false);
+
+
+  var wfullpage,arrow = $('.arrw-wrap');
+
+  (function(){
+      var pageCount;
+      wfullpage = new Wfullpage({
+                         upStyle:68,//向下切换页面样式
+                         downStyle:68, //向上切换页面样式
+                         // nextSwipe:"right",
+                         // prevSwipe:"left",
+                         container:$('#pt-main'),
+                         // swipeContainer:$('body'),
+                         onInitEnd:function(){animateCache();animate(wfullpage.get('current')); pageCount = wfullpage.get('pageCount');
+                         },
+                         onAnimateStart:function(){
+                          var index = wfullpage.get('current');
+                             animate(index);
+                             // if(index==1){
+                             //    $index3_1_2.show();
+                             //  }else{
+                             //    $index3_1_2.hide();
+                             //  }
+                         },
+                         onAnimateEnd:function(){
+                          var index = wfullpage.get('current');
+                          if(index == 0){clearAnimate(pageCount-1)}else{clearAnimate(index-1)};
+                          if(index == pageCount-1){clearAnimate(0)}else{clearAnimate(index+1)};
+                         },
+                     });
+
+  })()
+
+
+
+  // 图片资源初始化完成
+  $('.container').imagesLoaded(function(){
+      $('body').addClass('loaded');
+      $('.container').show();
+      wfullpage.init();
+  });
+</script>
+</html>
