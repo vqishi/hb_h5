@@ -5,7 +5,6 @@
         var localUrl = encodeURIComponent(window.location.href);
         // 统计访问/分享次数
         var defaults = {
-            debug: false,
             title: "忘记写标题了！",
             desc: "忘记写内容了！",
             link: localUrl,
@@ -45,7 +44,7 @@
 						timestamp:$(xml).find("timestamp").text()
 					};
 					wx.config({
-						debug: false,
+						debug: true,
 						appId: json.appId,
 						timestamp: json.timestamp,
 						nonceStr: json.nonceStr,
