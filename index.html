@@ -39,15 +39,16 @@
     <!-- pt -->
     <div id="pt-main" class="pt-perspective" >
       <div class="pt-page pt-page-1">
-         <img src="picture/1.jpg" class="bac">
-         <img src="picture/1_1.png" class="index-1_1 ani" animate-effect="Scaling" animate-duration="0.5s" animate-delay="0.5s">
+         <img   class="bac bgrd"/><!--src="picture/1.jpg"-->
+         <img  class="index-1_1 ani anPic" animate-effect="Scaling" animate-duration="0.5s" animate-delay="0.5s"/> <!--src="picture/1_1.png"-->
          <a id="next" class="ani" animate-effect="fadeInUp" animate-duration="0.5s" animate-delay="0.3s">
             <img src="picture/1_2.png" class="index-1_2 ani" animate-effect="Scales" animate-duration="0.3s" animate-delay="0.8s" style="transform-origin: center;" >
          </a>
       </div>
 
       <div class="pt-page pt-page-2">
-          <img src="picture/2.jpg" class="bac">
+          <img src="picture/1.jpg" class="bac bgrd">
+          <img  src="picture/1_1.png" class="ani anPic" animate-effect="Scaling" animate-duration="0.5s" animate-delay="0.5s" style="right:10px;top:10px;"/>
           <img src="picture/2_1.png" class="index-2_1">
           <img src="picture/2_2.png" class="index-2_2">
           <img src="picture/2_3.png" class="index-2_3">
@@ -63,14 +64,14 @@
       <div class="pt-page pt-page-3">
           <img src="" id="index-3_1" class="bac">
           <a href="index.html"><img src="" class="index-3_2 ani" animate-effect="Scales" animate-duration="0.5s" animate-delay="0.3s" style="transform-origin: center;"></a>
-          <img src="images/3_5_1.png" class="index-3_3"> 
+          <img src="images/3_5_1.png" class="index-3_3">
           <!-- 提示长按保存图片遮罩 tipIframe -->
           <div class="tipIframe">
             <label>长按保存图片，可分享至朋友圈</label>
           </div>
 
       </div>
-    </div>  
+    </div>
   </div>
 
   <!-- 第二页弹窗 selectPlane -->
@@ -90,7 +91,7 @@
   <div class="upDownload">
     <div class="screenShot">
       <img id="img1" src="">
-      
+
     </div>
     <a class="ok2"><img class="index-2_1_2" src="picture/2_1_2.png"></a>
     <a class="cancel2"><img class="index-2_1_3" src="picture/2_1_3.jpg"></a>
@@ -118,7 +119,7 @@
 
  <!-- 滑屏容器 over-->
 
-<!-- arrow box --> 
+<!-- arrow box -->
 <!--  <div class="arrw-wrap">
           <img src="picture/arrow.png" class="arrow-up">
  </div> -->
@@ -126,7 +127,7 @@
 
 <!-- 访问量显示器 -->
 <!--  <div id='visit_count'></div> -->
- 
+
  <!-- 背景音乐  -->
  <audio id="music" src="1.mp3" loop="loop" autoplay="autoplay"></audio>
 
@@ -146,9 +147,9 @@
 <script type="text/javascript" src="js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="js/weixin.share.js"></script>
 <script type="text/javascript">
-	
+
   var datas = {};
-  
+
   var templates=[];
   $.ajax({
 	  url:apiPath+"templateInfo/list",
@@ -190,7 +191,8 @@
 				link: window.location.href,
 				imgUrl:result.mainPic
 			});
-
+			$(".bgrd").attr("src",result.mainPic);
+			$(".anPic").attr("src",result.animationPic);
             // 图片资源初始化完成
             $('.pt-page-1').imagesLoaded(function(){//.contrainer
                 $('body').addClass('loaded');
@@ -208,7 +210,7 @@
   var $Splane = $("#Splane");
   var $index2_2_1 = $(".index-2_2_1");
 /*  var $imgUrls = ['images/3_1_1.jpg','images/3_2_1.jpg','images/3_3_1.jpg'];
-  var $imgUrl2s = ['images/3_1_2.png','images/3_2_2.png','images/3_3_2.png'];  
+  var $imgUrl2s = ['images/3_1_2.png','images/3_2_2.png','images/3_3_2.png'];
   var $imgUrl3s = ['images/3_4_1.png','images/3_4_1.png','images/3_4_3.png'];
   var $imgUrl4s = ['images/3_5_1.png','images/3_5_2.png','images/3_5_3.png'];*/
 
@@ -348,7 +350,7 @@
 	  $("#hbcanvas").html("");
 	  var hbwidth=panelImg.width||640;
 	  var hbheight=panelImg.height||1040;
-	  
+
 	  var scene = new spritejs.Scene('#hbcanvas', {
 		  viewport: [hbwidth,hbheight],
 		  resolution: [hbwidth,hbheight],
@@ -395,19 +397,19 @@
 /*	$index3_2.css({'left':'0px','bottom':'0px','width':'134px','height':'28px'});
 	$index3_3.attr('src', $imgUrl4s[index]);*/
    /* switch(index){
-        case 0: 
+        case 0:
           $photoName.css({'left':'68px','top':'904px','width':'162px','height':'78px','line-height':'78px','font-size':'40px'});
           $index3_2.attr('src', $imgUrl3s[index]);
           $index3_2.css({'left':'0px','bottom':'0px','width':'134px','height':'28px'});
           $index3_3.attr('src', $imgUrl4s[index]);
           break;
-        case 1: 
+        case 1:
           $photoName.css({'left':'0px','top':'392px','width':'174px','height':'55px','line-height':'55px','font-size':'40px'});
           $index3_2.attr('src', $imgUrl3s[index]);
           $index3_2.css({'left':'0px','bottom':'0px','width':'134px','height':'28px'});
           $index3_3.attr('src', $imgUrl4s[index]);
           break;
-        case 2: 
+        case 2:
           $photoName.css({'left':'180px','top':'638px','width':'175px','height':'69px','line-height':'69px','font-size':'30px'});
           $index3_2.attr('src', $imgUrl3s[index]);
           $index3_2.css({'right':'0px','top':'625px','width':'34px','height':'100px'});
@@ -434,7 +436,7 @@
 					wfullpage.toNextPage();
 					setTimeout(function(){
 						$tipIframe.fadeOut();
-					},1500);
+					},2500);
 					$index3_1_2.hide();
 				},
 				error:function(){
@@ -445,7 +447,7 @@
 				url:apiPath+"templateInfo/shareOnSuccess/"+templates[index].id||"",
 				type:'post',
 				success:function(data){
-					
+
 				}
 			})*/
 		},200)
@@ -477,11 +479,11 @@
 			}
 		});
 	},20)*/
-	
+
   });
 
     // var hideIframe = $(".hideIframe");
-    
+
     // hideIframe.on('click',function(){
 
     //     hideIframe.hide();
@@ -489,7 +491,7 @@
     // });
 
   }
-  
+
   var music = document.getElementById('music')
   music.play();
   document.addEventListener("WeixinJSBridgeReady", function () {
