@@ -137,14 +137,11 @@
 <script type="text/javascript" src='js/jquery.js'></script>
 <!--<script src="js/html2canvas.js"></script>-->
 <script type="text/javascript" src='js/sprite.min.js'></script>
-<script type="text/javascript" src='js/jquery.cookie.js'></script>
 <script type="text/javascript" src='js/jquery.touchswipe.min.js'></script>
 <script type="text/javascript" src='js/imagesloaded.pkgd.min.js'></script>
-<!-- <script src="js/jquery.touchswipe.min.js"></script> -->
 <script src="js/animate.js"></script>
 <script src="js/wfullpage.js"></script>
 <script src="js/cropper.js"></script>
-<script src="js/jquery.ui.widget.js"></script>
 <script src="js/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="js/weixin.share.js"></script>
@@ -159,6 +156,7 @@
 	  success:function(data){
 		  templates=data.data.rows;
 		  $("#style").attr('src',templates[0].mainPic);
+
 	  }
   });
   window.onload = function (){
@@ -187,12 +185,19 @@
 			var result=data.data;
 			$("title").text(result.title);
 			$.weixinShare({
-				debug: false,
+				debug: true,
 				title: result.title,
 				desc: result.name,
 				link: window.location.href,
 				imgUrl:result.mainPic
 			});
+
+            // 图片资源初始化完成
+            $('.pt-page-1').imagesLoaded(function(){//.contrainer
+                $('body').addClass('loaded');
+                $('.container').show();
+                wfullpage.init();
+            });
 		}
 	});
   var $pre = $(".pre");
@@ -246,7 +251,6 @@
   $Splane.on('click', function(){
      $selectPlane.fadeIn();
   });
-	var url = 'http://waajyun.s1.natapp.cc/file/upload';
 	var img = $("#img1");
 	var $upDownload = $(".upDownload");
 	var $index2_2_2 = $(".index-2_2_2");
@@ -524,14 +528,5 @@
                      });
 
   })()
-
-
-
-  // 图片资源初始化完成
-  $('.container').imagesLoaded(function(){
-      $('body').addClass('loaded');
-      $('.container').show();
-      wfullpage.init();
-  });
 </script>
 </html>
