@@ -160,339 +160,268 @@
 
 	  }
   });
-  window.onload = function (){
-    document.getElementsByTagName('body')[0].addEventListener('touchmove', function (e) {
-        e.preventDefault();
-    });
+  window.onload = function () {
+      document.getElementsByTagName('body')[0].addEventListener('touchmove', function (e) {
+          e.preventDefault();
+      });
 
-    //由于安卓下键盘弹出会导致页面resize的，写个监听resize事件
-    var height = $('body').height();
-    $(window).resize(function() {
-        $('.container').height(height);
-    });
+      //由于安卓下键盘弹出会导致页面resize的，写个监听resize事件
+      var height = $('body').height();
+      $(window).resize(function () {
+          $('.container').height(height);
+      });
 
-    window.alert = function(name){
-      var iframe = document.createElement("IFRAME");
-      iframe.style.display="none";
-      iframe.setAttribute("src", 'data:text/plain,');
-      document.documentElement.appendChild(iframe);
-      window.frames[0].window.alert(name);
-      iframe.parentNode.removeChild(iframe);
-    }
-	$.ajax({
-		url:apiPath+"baseInfo/detail",
-		dataType:"json",
-		success:function(data){
-			var result=data.data;
-			$("title").text(result.title);
-			$.weixinShare({
-				title: result.title,
-				desc: result.name,
-				link: window.location.href,
-				imgUrl:result.mainPic
-			});
-			$(".bgrd").attr("src",result.mainPic);
-			$(".anPic").attr("src",result.animationPic);
-            // 图片资源初始化完成
-            $('.pt-page-1').imagesLoaded(function(){//.contrainer
-                $('body').addClass('loaded');
-                $('.container').show();
-                wfullpage.init();
-            });
-		}
-	});
-  var $pre = $(".pre");
-  var $next2 = $(".next2");
-  var $close2 = $(".close2");
-  var $ok3 = $(".ok3");
-  var $style = $("#style");
-  var $selectPlane = $(".selectPlane");
-  var $Splane = $("#Splane");
-  var $index2_2_1 = $(".index-2_2_1");
-/*  var $imgUrls = ['images/3_1_1.jpg','images/3_2_1.jpg','images/3_3_1.jpg'];
+      window.alert = function (name) {
+          var iframe = document.createElement("IFRAME");
+          iframe.style.display = "none";
+          iframe.setAttribute("src", 'data:text/plain,');
+          document.documentElement.appendChild(iframe);
+          window.frames[0].window.alert(name);
+          iframe.parentNode.removeChild(iframe);
+      }
+      $.ajax({
+          url: apiPath + "baseInfo/detail",
+          dataType: "json",
+          success: function (data) {
+              var result = data.data;
+              $("title").text(result.title);
+              $.weixinShare({
+                  title: result.title,
+                  desc: result.name,
+                  link: window.location.href,
+                  imgUrl: result.mainPic
+              });
+              $(".bgrd").attr("src", result.mainPic);
+              $(".anPic").attr("src", result.animationPic);
+              // 图片资源初始化完成
+              $('.pt-page-1').imagesLoaded(function () {//.contrainer
+                  $('body').addClass('loaded');
+                  $('.container').show();
+                  wfullpage.init();
+              });
+          }
+      });
+      var $pre = $(".pre");
+      var $next2 = $(".next2");
+      var $close2 = $(".close2");
+      var $ok3 = $(".ok3");
+      var $style = $("#style");
+      var $selectPlane = $(".selectPlane");
+      var $Splane = $("#Splane");
+      var $index2_2_1 = $(".index-2_2_1");
+      /*  var $imgUrls = ['images/3_1_1.jpg','images/3_2_1.jpg','images/3_3_1.jpg'];
   var $imgUrl2s = ['images/3_1_2.png','images/3_2_2.png','images/3_3_2.png'];
   var $imgUrl3s = ['images/3_4_1.png','images/3_4_1.png','images/3_4_3.png'];
   var $imgUrl4s = ['images/3_5_1.png','images/3_5_2.png','images/3_5_3.png'];*/
 
-  var index = 0;
-  //上一页
-  $pre.on('click', function(){
-      index = (index == 0)?index:--index;
-      $style.attr('src',templates[index].mainPic);
-  });
-  //下一页
-  $next2.on('click', function(){
-      index = (index == (templates.length-1))?index:(++index);
-      $style.attr('src',templates[index].mainPic);
-  });
-  //关闭，取消
-  $close2.on('click', function(){
-      $selectPlane.fadeOut();
-  });
-  var panelImg=null;
-  //确定
-  $ok3.on('click', function(){
-     datas.panelImgUrl = templates[index].templatePic;
-	 panelImg=new Image();
-	 panelImg.src=datas.panelImgUrl;
-     $selectPlane.fadeOut();
-     if (datas.panelImgUrl!=''&&datas.panelImgUrl!=undefined&&datas.panelImgUrl!=null) {
-        $index2_2_1.show();
-     }
-	  $('#Uphoto').show();
-	  var image=new Image();
-	  image.src=datas.panelImgUrl;
-  });
-  $('.index-2_3').on("click",function(){
-  	if(!datas.panelImgUrl){
-  		alert("请先选择模版!")
-	}
-  });
-  //出现模板选择弹窗
-  $Splane.on('click', function(){
-     $selectPlane.fadeIn();
-  });
-	var img = $("#img1");
-	var $upDownload = $(".upDownload");
-	var $index2_2_2 = $(".index-2_2_2");
-	$('#Uphoto').hide();
-	$('#Uphoto').change(function(){
-  	//$('.imgLoading').show();
-	  	var url = window.URL.createObjectURL(this.files.item(0));
-		$('.imgLoading').hide();
-		$('#progress').hide();
-		img.attr('src', url);
-		img.cropper("destroy","","");
-		img.cropper({
-			aspectRatio: 0.615,
-			resizable:false,
-			minContainerWidth:panelImg.width||640,
-			minContainerHeight:panelImg.height||1040,
-			crop: function(e) {
-				// Output the result data for cropping image.
-/*				console.log(e.x);
+      var index = 0;
+      //上一页
+      $pre.on('click', function () {
+          index = (index == 0) ? index : --index;
+          $style.attr('src', templates[index].mainPic);
+      });
+      //下一页
+      $next2.on('click', function () {
+          index = (index == (templates.length - 1)) ? index : (++index);
+          $style.attr('src', templates[index].mainPic);
+      });
+      //关闭，取消
+      $close2.on('click', function () {
+          $selectPlane.fadeOut();
+      });
+      var panelImg = null;
+      //确定
+      $ok3.on('click', function () {
+          datas.panelImgUrl = templates[index].templatePic;
+          panelImg = new Image();
+          panelImg.src = datas.panelImgUrl;
+          $selectPlane.fadeOut();
+          if (datas.panelImgUrl != '' && datas.panelImgUrl != undefined && datas.panelImgUrl != null) {
+              $index2_2_1.show();
+          }
+          $('#Uphoto').show();
+          var image = new Image();
+          image.src = datas.panelImgUrl;
+      });
+      $('.index-2_3').on("click", function () {
+          if (!datas.panelImgUrl) {
+              alert("请先选择模版!")
+          }
+      });
+      //出现模板选择弹窗
+      $Splane.on('click', function () {
+          $selectPlane.fadeIn();
+      });
+      var img = $("#img1");
+      var $upDownload = $(".upDownload");
+      var $index2_2_2 = $(".index-2_2_2");
+      $('#Uphoto').hide();
+      $('#Uphoto').change(function () {
+          //$('.imgLoading').show();
+          var url = window.URL.createObjectURL(this.files.item(0));
+          $('.imgLoading').hide();
+          $('#progress').hide();
+          img.attr('src', url);
+          img.cropper("destroy", "", "");
+          img.cropper({
+              aspectRatio: 0.615,
+              resizable: false,
+              minContainerWidth: panelImg.width || 640,
+              minContainerHeight: panelImg.height || 1040,
+              crop: function (e) {
+                  // Output the result data for cropping image.
+                  /*				console.log(e.x);
 				console.log(e.y);
 				console.log(e.width);
 				console.log(e.height);
 				console.log(e.rotate);
 				console.log(e.scaleX);
 				console.log(e.scaleY);*/
-			}
-		});
+              }
+          });
 
-		$(".rotates").on('click', function(){
+          $(".rotates").on('click', function () {
 
-			img.cropper("rotate",90);
+              img.cropper("rotate", 90);
 
-		});
+          });
 
-		$(".ok2").on('click',function(){
+          $(".ok2").on('click', function () {
 
-			var can = img.cropper("getCroppedCanvas",{fillColor: "#fff"},"");
+              var can = img.cropper("getCroppedCanvas", {fillColor: "#fff"}, "");
 
-			var base64 = can.toDataURL("image/jpeg");
+              var base64 = can.toDataURL("image/jpeg");
 
-			datas.base64ImgUrl = base64;
+              datas.base64ImgUrl = base64;
 
-			$upDownload.fadeOut();
+              $upDownload.fadeOut();
 
-			if (datas.base64ImgUrl!=''&&datas.base64ImgUrl!=undefined&&datas.base64ImgUrl!=null) {
+              if (datas.base64ImgUrl != '' && datas.base64ImgUrl != undefined && datas.base64ImgUrl != null) {
 
-				$index2_2_2.show();
-			}
+                  $index2_2_2.show();
+              }
 
-		});
+          });
 
-		$(".cancel2").on('click', function(){
+          $(".cancel2").on('click', function () {
 
-			$upDownload.fadeOut();
+              $upDownload.fadeOut();
 
-		});
-		$upDownload.show();
-	});
-  var $yes = $("#yes");
-  var $name = $("#name");
-  var $index3_1 = $("#index-3_1");
-  var $index3_1_2 = $("#index-3_1_2");
-  var $makingLoading = $(".makingLoading");
-  var $tipIframe = $(".tipIframe");
-  var $index3_2 = $(".index-3_2");
-  var $index3_3 = $(".index-3_3");
-   var $next = $("#next");
-  $next.on('click', function(){
-      wfullpage.toNextPage();
-  });
+          });
+          $upDownload.show();
+      });
+      var $yes = $("#yes");
+      var $name = $("#name");
+      var $index3_1 = $("#index-3_1");
+      var $index3_1_2 = $("#index-3_1_2");
+      var $makingLoading = $(".makingLoading");
+      var $tipIframe = $(".tipIframe");
+      var $index3_2 = $(".index-3_2");
+      var $index3_3 = $(".index-3_3");
+      var $next = $("#next");
+      $next.on('click', function () {
+          wfullpage.toNextPage();
+      });
 
-  $yes.on('click', function(){
-    var name = $name.val();
+      $yes.on('click', function () {
+          var name = $name.val();
 
-    if (name==''||name==undefined||name==null){
+          if (name == '' || name == undefined || name == null) {
 
-          alert('请输入姓名');
-          return false;
+              alert('请输入姓名');
+              return false;
 
-    }
+          }
 
-    if (datas.panelImgUrl==''||datas.panelImgUrl==undefined||datas.panelImgUrl==null){
+          if (datas.panelImgUrl == '' || datas.panelImgUrl == undefined || datas.panelImgUrl == null) {
 
-          alert('请选择模板');
-          return false;
+              alert('请选择模板');
+              return false;
 
-    }
+          }
 
-    if (datas.base64ImgUrl==''||datas.base64ImgUrl==undefined||datas.base64ImgUrl==null){
+          if (datas.base64ImgUrl == '' || datas.base64ImgUrl == undefined || datas.base64ImgUrl == null) {
 
-          alert('请上传照片');
-          return false;
-    }
+              alert('请上传照片');
+              return false;
+          }
+          $makingLoading.show();
+          $index3_1_2.show();
+          $("#hbcanvas").html("");
+          var hbwidth = panelImg.width || 640;
+          var hbheight = panelImg.height || 1040;
 
-	  $index3_1_2.show();
-	  $("#hbcanvas").html("");
-	  var hbwidth=panelImg.width||640;
-	  var hbheight=panelImg.height||1040;
-
-	  var scene = new spritejs.Scene('#hbcanvas', {
-		  viewport: [hbwidth,hbheight],
-		  resolution: [hbwidth,hbheight],
-	  });
-	  var layer = scene.layer();
-	  datas.name = $name.val();
-	  var hbbackground = new spritejs.Sprite(datas.panelImgUrl);
-	  hbbackground.attr({
-		  anchor: [0,0],
-		  pos: [0, 0],
-		  zIndex:2,
-	  });
-	  layer.append(hbbackground);
-	//$backgroundStyle.attr("src", datas.panelImgUrl);
-	var layers=(typeof templates[index].json==="string"?JSON.parse(templates[index].json):templates[index].json);
-	//$index3_3.attr('src',templates[index].mainPic);
-	for(var i=0;i<layers.length;i++){
-		layers[i].style=layers[i].style||{};
-		if(layers[i].type==='text'){
-/*			$photoName.css(layers[i].style);
-			$photoName.html(datas.name);*/
-			var label = new spritejs.Label(datas.name);
-			label.attr({
-				"pos":layers[i].style.pos,
-				"fillColor":layers[i].style.fillColor||"white",
-				"font":layers[i].style.font||"30px '微软雅黑'",
-				"lineHeight":layers[i].style.lineHeight,
-				"zIndex":layers[i].style.zIndex||10
-			});
-			layer.append(label);
-		}else if(layers[i].type==='image'){
-			var image=new spritejs.Sprite(datas.base64ImgUrl);
-			image.attr({
-				"pos":layers[i].style.pos,
-				"size":layers[i].style.size
-			});
-			layer.append(image);
-/*			$photo.attr("src", datas.base64ImgUrl);
-			$photo.css(layers[i].style);*/
-		}
-	}
-	$index3_2.css({'left':'0px','bottom':'0px','width':'134px','height':'28px'});
-	$index3_2.attr('src','picture/3_4_1.png');
-/*	$index3_2.css({'left':'0px','bottom':'0px','width':'134px','height':'28px'});
-	$index3_3.attr('src', $imgUrl4s[index]);*/
-   /* switch(index){
-        case 0:
-          $photoName.css({'left':'68px','top':'904px','width':'162px','height':'78px','line-height':'78px','font-size':'40px'});
-          $index3_2.attr('src', $imgUrl3s[index]);
-          $index3_2.css({'left':'0px','bottom':'0px','width':'134px','height':'28px'});
-          $index3_3.attr('src', $imgUrl4s[index]);
-          break;
-        case 1:
-          $photoName.css({'left':'0px','top':'392px','width':'174px','height':'55px','line-height':'55px','font-size':'40px'});
-          $index3_2.attr('src', $imgUrl3s[index]);
-          $index3_2.css({'left':'0px','bottom':'0px','width':'134px','height':'28px'});
-          $index3_3.attr('src', $imgUrl4s[index]);
-          break;
-        case 2:
-          $photoName.css({'left':'180px','top':'638px','width':'175px','height':'69px','line-height':'69px','font-size':'30px'});
-          $index3_2.attr('src', $imgUrl3s[index]);
-          $index3_2.css({'right':'0px','top':'625px','width':'34px','height':'100px'});
-          $index3_3.attr('src', $imgUrl4s[index]);
-          break;
-        default:
-          break;
-    }*/
-    var url = '';
-    $makingLoading.show();
-    scene.snapshot().then(function(canvas){
-    	setTimeout(function(){
-			var base64 =$("#hbcanvas canvas")[0].toDataURL('image/jpeg');
-			//$index3_3.attr('src',base64);
-			datas.screenShotImgUrl = base64;
-			$index3_1.show();
-			$index3_1.attr("src",base64);
-			$.ajax({
-				url:apiPath+"sharedLog/upload",
-				type:"post",
-				data:{templateId:templates[index].id,userName:datas.name,base64:base64},
-				success:function(data){
-					$makingLoading.hide();
-					wfullpage.toNextPage();
-					setTimeout(function(){
-						$tipIframe.fadeOut();
-					},2500);
-					$index3_1_2.hide();
-				},
-				error:function(){
-					$tipIframe.fadeOut();
-				}
-			});
-			/*$.ajax({
-				url:apiPath+"templateInfo/shareOnSuccess/"+templates[index].id||"",
-				type:'post',
-				success:function(data){
-
-				}
-			})*/
-		},200)
-	})
-/*    setTimeout(function(){
-		html2canvas(document.getElementById('index-3_1_2'), {
-			allowTaint: true,
-			taintTest: false,
-			background:"#fff",
-			onrendered: function (canvas) {
-				$makingLoading.hide();
-				var base64 = canvas.toDataURL("images/e601288fd3a54ee79e31baa47dd67379.gif");
-				datas.screenShotImgUrl = base64;
-
-
-				$index3_1.show();
-				$index3_1.attr("src",base64);
-
-				wfullpage.toNextPage();
-
-
-				$index3_1_2.hide();
-
-				setTimeout(function(){
-
-					$tipIframe.fadeOut();
-
-				}, 2500);
-			}
-		});
-	},20)*/
-
-  });
-
-    // var hideIframe = $(".hideIframe");
-
-    // hideIframe.on('click',function(){
-
-    //     hideIframe.hide();
-
-    // });
-
+          var scene = new spritejs.Scene('#hbcanvas', {
+              viewport: [hbwidth, hbheight],
+              resolution: [hbwidth, hbheight],
+          });
+          var layer = scene.layer();
+          var id=Math.random()+"";
+          scene.preload({
+              id:id,
+              src:datas.panelImgUrl
+          }).then(function(){
+              datas.name = $name.val();
+              var hbbackground = new spritejs.Sprite(id);
+              hbbackground.attr({
+                  anchor: [0, 0],
+                  pos: [0, 0],
+                  zIndex: 2,
+              });
+              layer.append(hbbackground);
+              //$backgroundStyle.attr("src", datas.panelImgUrl);
+              var layers = (typeof templates[index].json === "string" ? JSON.parse(templates[index].json) : templates[index].json);
+              //$index3_3.attr('src',templates[index].mainPic);
+              for (var i = 0; i < layers.length; i++) {
+                  layers[i].style = layers[i].style || {};
+                  if (layers[i].type === 'text') {
+                      var label = new spritejs.Label(datas.name);
+                      label.attr({
+                          "pos": layers[i].style.pos,
+                          "fillColor": layers[i].style.fillColor || "white",
+                          "font": layers[i].style.font || "30px '微软雅黑'",
+                          "lineHeight": layers[i].style.lineHeight,
+                          "zIndex": layers[i].style.zIndex || 10
+                      });
+                      layer.append(label);
+                  } else if (layers[i].type === 'image') {
+                      var image = new spritejs.Sprite(datas.base64ImgUrl);
+                      image.attr({
+                          "pos": layers[i].style.pos,
+                          "size": layers[i].style.size
+                      });
+                      layer.append(image);
+                  }
+              }
+              $index3_2.css({'left': '0px', 'bottom': '0px', 'width': '134px', 'height': '28px'});
+              $index3_2.attr('src', 'picture/3_4_1.png');
+              setTimeout(function(){
+                  var base64 = $("#hbcanvas canvas")[0].toDataURL('image/jpeg');
+                  //$index3_3.attr('src',base64);
+                  datas.screenShotImgUrl = base64;
+                  $index3_1.show();
+                  $index3_1.attr("src", base64);
+                  $.ajax({
+                      url: apiPath + "sharedLog/upload",
+                      type: "post",
+                      data: {templateId: templates[index].id, userName: datas.name, base64: base64},
+                      success: function (data) {
+                          $makingLoading.hide();
+                          wfullpage.toNextPage();
+                          setTimeout(function () {
+                              $tipIframe.fadeOut();
+                          }, 2500);
+                          $index3_1_2.hide();
+                      },
+                      error: function () {
+                          $tipIframe.fadeOut();
+                      }
+                  });
+              },300);
+          });
+      });
   }
-
-  var music = document.getElementById('music')
+  var music = document.getElementById('music');
   music.play();
   document.addEventListener("WeixinJSBridgeReady", function () {
         music.play();
