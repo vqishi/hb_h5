@@ -127,6 +127,10 @@ input::-webkit-input-placeholder{
     left: 135px;
     top: 215px;
     width: 371px;height: 543px;
+    color:#333;
+    font-size:30px;
+    text-align:center;
+    line-height:300px;
 }
 
 .upDownload{

@@ -14,29 +14,15 @@
     <script type="text/javascript" src='js/prefixfree.min.js'></script>
 </head>
 <body>
-  <!-- 加载页面 -->
   <div id="loader-wrapper" >
-    <div id="loader"></div><!-- <div class="logos"></div> -->
+    <div id="loader"></div>
     <div class="loader-section section-left"></div>
     <div class="loader-section section-right"></div>
   </div>
-  <!-- 加载页面 over-->
-
-
-  <!-- 截图前的div -->
   <div id="index-3_1_2">
-	  <!--<div style="width:100%;height:100%;position:relative;">
-		  <img src="" id="photo">
-		  <img src="" id="background-style">
-		  <span id="photo-name"></span>
-	  </div>-->
 	  <div id="hbcanvas" style="width:100%;height:100%;"></div>
   </div>
-
-
- <!-- 滑屏容器 -->
  <div class="container" id="container">
-    <!-- pt -->
     <div id="pt-main" class="pt-perspective" >
       <div class="pt-page pt-page-1">
          <img   class="bac bgrd"/><!--src="picture/1.jpg"-->
@@ -65,11 +51,9 @@
           <img src="" id="index-3_1" class="bac">
           <a href="index.html"><img src="" class="index-3_2 ani" animate-effect="Scales" animate-duration="0.5s" animate-delay="0.3s" style="transform-origin: center;"></a>
           <img src="images/3_5_1.png" class="index-3_3">
-          <!-- 提示长按保存图片遮罩 tipIframe -->
           <div class="tipIframe">
             <label>长按保存图片，可分享至朋友圈</label>
           </div>
-
       </div>
     </div>
   </div>
@@ -78,7 +62,7 @@
 
   <div class="selectPlane">
     <div class="content">
-      <img id="style" src="">
+      <img id="style" src="" alt="模版加载中...">
       <button class="close close2"></button>
       <button class="pre"></button>
       <button class="next2 "></button>
@@ -230,6 +214,7 @@
           $selectPlane.fadeOut();
       });
       var panelImg = null;
+      var layers = null;
       //确定
       $ok3.on('click', function () {
           datas.panelImgUrl = templates[index].templatePic;
@@ -240,8 +225,7 @@
               $index2_2_1.show();
           }
           $('#Uphoto').show();
-          var image = new Image();
-          image.src = datas.panelImgUrl;
+          layers=(typeof templates[index].json === "string" ? JSON.parse(templates[index].json) : templates[index].json);
       });
       $('.index-2_3').on("click", function () {
           if (!datas.panelImgUrl) {
@@ -263,11 +247,19 @@
           $('#progress').hide();
           img.attr('src', url);
           img.cropper("destroy", "", "");
+          for(var i=0;i<layers.length;i++){
+              if(layers[i].type==="image"){
+                  var width=layers[i].style.size[0];
+                  var height=layers[i].style.size[1];
+              }
+          }
+          width=width||640;
+          height=height||1040;
           img.cropper({
-              aspectRatio: 0.615,
+              aspectRatio:width/height,
               resizable: false,
-              minContainerWidth: panelImg.width || 640,
-              minContainerHeight: panelImg.height || 1040,
+              minContainerWidth:640,
+              minContainerHeight:1040,
               crop: function (e) {
                   // Output the result data for cropping image.
                   /*				console.log(e.x);
@@ -370,7 +362,6 @@
               });
               layer.append(hbbackground);
               //$backgroundStyle.attr("src", datas.panelImgUrl);
-              var layers = (typeof templates[index].json === "string" ? JSON.parse(templates[index].json) : templates[index].json);
               //$index3_3.attr('src',templates[index].mainPic);
               for (var i = 0; i < layers.length; i++) {
                   layers[i].style = layers[i].style || {};
