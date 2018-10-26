@@ -17,11 +17,11 @@
 </div>
 <script>
     function openWxDebug(){
-        sessionStorage.setItem("wx.debug","1");
+        localStorage.setItem("wx.debug","1");
         alert("开启调试");
     }
     function closeWxDebug(){
-        sessionStorage.removeItem("wx.debug");
+        localStorage.removeItem("wx.debug");
         alert("关闭调试");
     }
 </script>
