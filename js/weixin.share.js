@@ -44,7 +44,7 @@
 						timestamp:$(xml).find("timestamp").text()
 					};
 					wx.config({
-						debug: true,
+						debug: sessionStorage&&(!!sessionStorage.getItem('wx.debug')),
 						appId: json.appId,
 						timestamp: json.timestamp,
 						nonceStr: json.nonceStr,

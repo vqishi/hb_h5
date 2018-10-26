@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信测试</title>
+</head>
+<body>
+<button type="button" onclick="openWxDebug()">开启微信debug</button>
+<button type="button" onclick="closeWxDebug()">关闭微信debug</button>
+<script>
+    function openWxDebug(){
+        sessionStorage.setItem("wx.debug","1");
+    }
+    function closeWxDebug(){
+        sessionStorage.removeItem("wx.debug");
+    }
+</script>
+</body>
+</html>
