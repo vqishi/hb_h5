@@ -26,19 +26,23 @@
     <div id="pt-main" class="pt-perspective" >
       <div class="pt-page pt-page-1">
          <img   class="bac bgrd"/><!--src="picture/1.jpg"-->
-         <img  class="index-1_1 ani anPic" animate-effect="Scaling" animate-duration="0.5s" animate-delay="0.5s"/> <!--src="picture/1_1.png"-->
-         <a id="next" class="ani" animate-effect="fadeInUp" animate-duration="0.5s" animate-delay="0.3s">
+         <img src="images/page1/y1.png" class="ani page1_y1" animate-effect="bounceIn" animate-duration="1s" animate-delay="0.5s" style="transform-origin:100% 0;"/><!--src="picture/1.jpg"-->
+         <img src="images/page1/y2.png" class="ani page1_y2" animate-effect="bounceIn" animate-duration="1s" animate-delay="1.4s" style="transform-origin:0 center;"/><!--src="picture/1.jpg"-->
+         <img src="images/page1/y3.png"  class="ani page1_y3" animate-effect="bounceIn" animate-duration="1s" animate-delay="1.7s" style="transform-origin:100% 100%;"/><!--src="picture/1.jpg"-->
+         <img id="next" src="images/page1/hand.png"  class="ani page1_hand" animate-effect="Scales" animate-duration="0.3s" animate-delay="2.2s"/><!--src="picture/1.jpg"-->
+         <img  class="index-1_1 ani anPic" animate-effect="Scaling" animate-duration="0.9s" animate-delay="0.9s"/> <!--src="picture/1_1.png"-->
+         <!--<a id="next" class="ani" animate-effect="fadeInUp" animate-duration="0.5s" animate-delay="0.3s">
             <img src="picture/1_2.png" class="index-1_2 ani" animate-effect="Scales" animate-duration="0.3s" animate-delay="0.8s" style="transform-origin: center;" >
-         </a>
+         </a>-->
       </div>
 
       <div class="pt-page pt-page-2">
-          <img src="picture/1.jpg" class="bac bgrd">
-          <img  src="picture/1_1.png" class="ani anPic" animate-effect="Scaling" animate-duration="0.5s" animate-delay="0.5s" style="right:10px;top:10px;"/>
+          <img src="images/ny.jpg" class="bac">
+          <!--<img  src="picture/1_1.png" class="ani anPic" animate-effect="Scaling" animate-duration="0.5s" animate-delay="0.5s" style="right:10px;top:10px;"/>-->
           <img src="picture/2_1.png" class="index-2_1">
           <img src="picture/2_2.png" class="index-2_2">
           <img src="picture/2_3.png" class="index-2_3">
-          <img src="picture/2_4.png" class="index-2_4 ani" animate-effect="Scales" animate-duration="0.5s" animate-delay="0.3s" style="transform-origin: center;">
+          <img src="images/yes.png" class="index-2_4 ani" animate-effect="Scales" animate-duration="0.5s" animate-delay="0.3s" style="transform-origin: center;">
           <input type="text" name="name" id="name" class="name" placeholder="填入姓名">
           <button id="Splane"></button>
           <input id="Uphoto" type="file" name="files" accept="image/*" >

@@ -6,22 +6,27 @@
 
 /*图片位置定位*/
 .bac{left: 0;top: 0;width: 100%; height: 100%}
-.pt-page-1 .index-1_1{left:209px;top: 248px}
+.pt-page-1 .index-1_1{left:186px;top: 148px}
 .pt-page-1 .index-1_2{left:246px;top: 734px;width: 146px;height: 126px;}
+.page1_y1{right:0;top:0;}
+.page1_y2{left:0;top:294px}
+.page1_y3{right:0;bottom:0}
+.page1_hand{left:20px;bottom:38px;}
 
-.pt-page-2 .index-2_1{left:76px;top: 403px}
-.pt-page-2 .index-2_2_1{left:45%;top:537px;display: none;}
-.pt-page-2 .index-2_2{left:76px;top: 520px}
-.pt-page-2 .index-2_2_2{left:45%;top: 658px;display: none;}
-.pt-page-2 .index-2_3{left:76px;top: 641px;}
-.pt-page-2 .index-2_4{left:430px;top: 489px;}
-.name{position: absolute;left:60px;top: 403px;width: 277px;height: 66px;font-size: 30px;background: transparent;border: none;padding: 0 20px;color: rgb(99,149,159);text-align: center;}
+
+.pt-page-2 .index-2_1{left:76px;top: 229px}
+.pt-page-2 .index-2_2_1{left:45%;top:360px;display: none;}
+.pt-page-2 .index-2_2{left:76px;top: 344px}
+.pt-page-2 .index-2_2_2{left:45%;top: 479px;display: none;}
+.pt-page-2 .index-2_3{left:76px;top:463px;}
+
+.name{position: absolute;left:60px;top: 229px;width: 277px;height: 66px;font-size: 30px;background: transparent;border: none;padding: 0 20px;color: rgb(99,149,159);text-align: center;}
 input::-webkit-input-placeholder{
     color: rgb(99,149,159);
     text-align: center;
 }
 #Splane{
-    left:76px;top: 520px;
+    left:76px;top: 344px;
     width: 277px;height: 66px;
     position: absolute;
     background: transparent;
@@ -29,18 +34,23 @@ input::-webkit-input-placeholder{
 }
 #Uphoto{
     opacity: 0;
-    left:76px;top: 641px;
+    left:76px;top: 463px;
     width: 277px;height: 66px;
     position: absolute;
     background: transparent;
     border:none;
 }
 #yes{
-    left:430px;top: 489px;
-    width: 130px;height: 169px;
+    left:280px;
+    top:619px;
+    width: 99px;height: 114px;
     position: absolute;
     background: transparent;
     border:none;
+}
+.pt-page-2 .index-2_4{
+    left:280px;
+    top:619px;
 }
 #Splane:hover{
     background: rgba(3,3,3,0.1);
