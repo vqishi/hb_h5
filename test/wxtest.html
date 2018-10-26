@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>微信测试</title>
+    <style>
+        button{
+            font-size:40px;
+            margin:20px;
+        }
+    </style>
 </head>
 <body>
-<button type="button" onclick="openWxDebug()">开启微信debug</button>
-<button type="button" onclick="closeWxDebug()">关闭微信debug</button>
+<div style="text-align: center;padding-top:50px;">
+    <button type="button" onclick="openWxDebug()">开启微信debug</button><br/>
+    <button type="button" onclick="closeWxDebug()">关闭微信debug</button>
+</div>
 <script>
     function openWxDebug(){
         sessionStorage.setItem("wx.debug","1");
+        alert("开启调试");
     }
     function closeWxDebug(){
         sessionStorage.removeItem("wx.debug");
+        alert("关闭调试");
     }
 </script>
 </body>

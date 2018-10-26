@@ -173,11 +173,13 @@
           success: function (data) {
               var result = data.data;
               $("title").text(result.title);
+              var url=window.location.href;
+              url=url.substring(0,url.lastIndexOf("/"));
               $.weixinShare({
                   title: result.title,
                   desc: result.name,
                   link: window.location.href,
-                  imgUrl: result.mainPic
+                  imgUrl:url+"/images/logo.jpg"
               });
               $(".bgrd").attr("src", result.mainPic);
               $(".anPic").attr("src", result.animationPic);
