@@ -56,7 +56,11 @@
           <a href="index.html"><img src="" class="index-3_2 ani" animate-effect="Scales" animate-duration="0.5s" animate-delay="0.3s" style="transform-origin: center;"></a>
           <img src="images/3_5_1.png" class="index-3_3">
           <div class="tipIframe">
-            <label>长按保存图片，可分享至朋友圈</label>
+            <label>
+                <!--长按保存图片，可分享至朋友圈-->
+                转发到朋友圈集赞,<br/>
+                可领取小礼物～
+            </label>
           </div>
       </div>
     </div>
@@ -139,6 +143,7 @@
   var datas = {};
 
   var templates=[];
+  var wfullpage,arrow = $('.arrw-wrap');
   $.ajax({
 	  url:apiPath+"templateInfo/list",
 	  dataType:"json",
@@ -320,6 +325,9 @@
       $next.on('click', function () {
           wfullpage.toNextPage();
       });
+      $tipIframe.click(function(){
+          $tipIframe.fadeOut();
+      });
 
       $yes.on('click', function () {
           var name = $name.val();
@@ -405,9 +413,9 @@
                       success: function (data) {
                           $makingLoading.hide();
                           wfullpage.toNextPage();
-                          setTimeout(function () {
+   /*                       setTimeout(function () {
                               $tipIframe.fadeOut();
-                          }, 2500);
+                          }, 2500);*/
                           $index3_1_2.hide();
                       },
                       error: function () {
@@ -417,15 +425,9 @@
               },300);
           });
       });
-  }
-  var music = document.getElementById('music');
-  music.play();
-  document.addEventListener("WeixinJSBridgeReady", function () {
-        music.play();
-  }, false);
+  };
 
 
-  var wfullpage,arrow = $('.arrw-wrap');
 
   (function(){
       var pageCount;
@@ -455,5 +457,10 @@
                      });
 
   })()
+  var music = document.getElementById('music');
+  music.play();
+  document.addEventListener("WeixinJSBridgeReady", function () {
+      music.play();
+  }, false);
 </script>
 </html>

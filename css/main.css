@@ -212,7 +212,7 @@ input::-webkit-input-placeholder{
     background-color: white;
 }
 .imgLoading .progress-bar {
-    height: 100%;    
+    height: 100%;
     width: 0;
     font-size: 12px;
     line-height: 20px;
@@ -260,7 +260,7 @@ input::-webkit-input-placeholder{
 .tipIframe{
     /*display: none;*/
     z-index: 999;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.6);
     position: fixed;
     width: 100%;
     height: 100%;
@@ -271,12 +271,12 @@ input::-webkit-input-placeholder{
     left: 22.5%;
     background-color: rgba(210,210,210,0.9);
     width: 360px;
-    height:100px;
     text-align: center;
-    line-height: 100px;
+    line-height:150%;
     font-size: 24px;
     border-radius: 12px;
     color: #555;
+    padding:10px 0;
 }
 
 .Scales{
