@@ -9,11 +9,16 @@
             margin:20px;
         }
     </style>
+    <script type="text/javascript" src='../js/dom2image.js'></script>
+    <script type="text/javascript" src='../js/sprite.min.js'></script>
 </head>
 <body>
-<div style="text-align: center;padding-top:50px;">
+<div id="con" style="text-align: center;padding-top:50px;">
     <button type="button" onclick="openWxDebug()">开启微信debug</button><br/>
-    <button type="button" onclick="closeWxDebug()">关闭微信debug</button>
+    <button type="button" onclick="closeWxDebug()">关闭微信debug</button><br/>
+    <!--<img src="https://192.168.11.11/img/bd_logo1.png"/>-->
+    <div id="scene" style="width:400px;height:800px;">
+    </div>
 </div>
 <script>
     function openWxDebug(){
@@ -24,6 +29,47 @@
         localStorage.removeItem("wx.debug");
         alert("关闭调试");
     }
+
+</script>
+<script>
+    const {Scene, Sprite} = spritejs;
+
+    const scene = new Scene('#scene', {
+        viewport: ['auto', 'auto'],
+    });
+
+    const layer = scene.layer();
+
+    const robot = new Sprite('https://p5.ssl.qhimg.com/t01c33383c0e168c3c4.png');
+
+    robot.attr({
+        anchor: [0, 0.5],
+        pos: [0, 0],
+    });
+
+    robot.animate([
+        {pos: [0, 0]},
+        {pos: [0, 300]},
+        {pos: [2700, 300]},
+        {pos: [2700, 0]},
+    ], {
+        duration: 5000,
+        iterations: Infinity,
+        direction: 'alternate',
+    });
+    layer.append(robot);
+    setTimeout(function(){
+        domtoimage.toPng(document.getElementById("con"))
+            .then(function (dataUrl) {
+                var img = new Image();
+                img.src = dataUrl;
+                document.body.appendChild(img);
+            })
+            .catch(function (error) {
+                console.error('oops, something went wrong!', error);
+            });
+    },1000)
+
 </script>
 </body>
 </html>
