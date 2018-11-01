@@ -41,7 +41,8 @@ input::-webkit-input-placeholder{
     border:none;
 }
 #yes{
-    left:280px;
+    left:50%;
+    margin-left:-50px;
     top:619px;
     width: 99px;height: 114px;
     position: absolute;
@@ -49,7 +50,8 @@ input::-webkit-input-placeholder{
     border:none;
 }
 .pt-page-2 .index-2_4{
-    left:280px;
+    left:50%;
+    margin-left:-50px;
     top:619px;
 }
 #Splane:hover{
