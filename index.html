@@ -28,7 +28,7 @@
          <img   class="bac bgrd"/><!--src="picture/1.jpg"-->
          <img src="images/page1/y1.png" class="ani page1_y1" animate-effect="bounceIn" animate-duration="1s" animate-delay="0.5s" style="transform-origin:100% 0;"/><!--src="picture/1.jpg"-->
          <img src="images/page1/y2.png" class="ani page1_y2" animate-effect="bounceIn" animate-duration="1s" animate-delay="1.4s" style="transform-origin:0 center;"/><!--src="picture/1.jpg"-->
-         <img src="images/page1/f1.png" class="ani page1_f1" animate-effect="Scaling" animate-duration="0.4s" animate-delay="1.4s" style="transform-origin:0 center;"/><!--src="picture/1.jpg"-->
+         <img src="images/page1/f1.png" class="ani page1_f1" animate-effect="bounceIn" animate-duration="1s" animate-delay="1.4s" style="transform-origin:0 center;"/><!--src="picture/1.jpg"-->
          <img src="images/page1/y3.png"  class="ani page1_y3" animate-effect="bounceIn" animate-duration="1s" animate-delay="1.8s" style="transform-origin:100% 100%;"/><!--src="picture/1.jpg"-->
          <img id="next" src="images/page1/hand.png"  class="ani page1_hand" animate-effect="Scales" animate-duration="0.3s" animate-delay="2.2s"/><!--src="picture/1.jpg"-->
          <img  class="index-1_1 ani anPic" animate-effect="Scaling" animate-duration="0.9s" animate-delay="0.9s"/> <!--src="picture/1_1.png"-->
@@ -71,6 +71,7 @@
   <div class="selectPlane">
     <div class="content">
       <img id="style" src="" alt="模版加载中...">
+      <div class="imgPgt">1/5</div>
       <button class="close close2"></button>
       <button class="pre"></button>
       <button class="next2 "></button>
@@ -82,8 +83,7 @@
   <!--第二页弹窗 upDownload  -->
   <div class="upDownload">
     <div class="screenShot">
-      <img id="img1" src="">
-
+      <img id="img1" src=""/>
     </div>
     <a class="ok2"><img class="index-2_1_2" src="picture/2_1_2.png"></a>
     <a class="cancel2"><img class="index-2_1_3" src="picture/2_1_3.jpg"></a>
@@ -150,7 +150,6 @@
 	  success:function(data){
 		  templates=data.data.rows;
 		  $("#style").attr('src',templates[0].mainPic);
-
 	  }
   });
   window.onload = function () {
@@ -204,21 +203,25 @@
       var $selectPlane = $(".selectPlane");
       var $Splane = $("#Splane");
       var $index2_2_1 = $(".index-2_2_1");
+      var imgPgt=$(".imgPgt");
       /*  var $imgUrls = ['images/3_1_1.jpg','images/3_2_1.jpg','images/3_3_1.jpg'];
   var $imgUrl2s = ['images/3_1_2.png','images/3_2_2.png','images/3_3_2.png'];
   var $imgUrl3s = ['images/3_4_1.png','images/3_4_1.png','images/3_4_3.png'];
   var $imgUrl4s = ['images/3_5_1.png','images/3_5_2.png','images/3_5_3.png'];*/
 
       var index = 0;
+      imgPgt.html(1+"/"+templates.length);
       //上一页
       $pre.on('click', function () {
           index = (index == 0) ? index : --index;
           $style.attr('src', templates[index].mainPic);
+          imgPgt.html(index+1+"/"+templates.length);
       });
       //下一页
       $next2.on('click', function () {
           index = (index == (templates.length - 1)) ? index : (++index);
           $style.attr('src', templates[index].mainPic);
+          imgPgt.html(index+1+"/"+templates.length);
       });
       //关闭，取消
       $close2.on('click', function () {
