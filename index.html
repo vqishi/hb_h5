@@ -71,7 +71,7 @@
   <div class="selectPlane">
     <div class="content">
       <img id="style" src="" alt="模版加载中...">
-      <div class="imgPgt">1/5</div>
+      <div class="imgPgt"></div>
       <button class="close close2"></button>
       <button class="pre"></button>
       <button class="next2 "></button>
@@ -150,6 +150,7 @@
 	  success:function(data){
 		  templates=data.data.rows;
 		  $("#style").attr('src',templates[0].mainPic);
+          $(".imgPgt").html(1+"/"+templates.length);
 	  }
   });
   window.onload = function () {
@@ -210,7 +211,6 @@
   var $imgUrl4s = ['images/3_5_1.png','images/3_5_2.png','images/3_5_3.png'];*/
 
       var index = 0;
-      imgPgt.html(1+"/"+templates.length);
       //上一页
       $pre.on('click', function () {
           index = (index == 0) ? index : --index;
